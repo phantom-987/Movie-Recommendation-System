@@ -1,0 +1,9 @@
+pandas
+numpy
+scikit-learn
+scikit-surprise
+matplotlib
+seaborn
+fastapi
+uvicorn
+pydantic
