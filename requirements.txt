@@ -7,3 +7,5 @@ seaborn
 fastapi
 uvicorn
 pydantic
+fastapi
+uvicorn
