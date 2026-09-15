@@ -1,0 +1,541 @@
+:root {
+  --ink: #06090f;
+  --ink-2: #0c1220;
+  --raise: #121a2b;
+  --line: rgba(255, 255, 255, 0.09);
+  --text: #eceff6;
+  --muted: #8a97ad;
+  --amber: #f5b841;
+  --bad: #ff8b6b;
+  --radius: 4px;
+  --rail-gap: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text);
+  font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
+
+.app {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding-bottom: 72px;
+}
+
+/* ---------- top bar ---------- */
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 14px clamp(16px, 4vw, 52px);
+  background: linear-gradient(var(--ink) 65%, rgba(6, 9, 15, 0.82));
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+.top__brand {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 26px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.top__markAlt {
+  color: var(--amber);
+  font-style: italic;
+}
+
+.top__user {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.top__user input {
+  width: 160px;
+  padding: 9px 12px;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.top__user button {
+  padding: 9px 16px;
+  background: transparent;
+  border: 1px solid var(--amber);
+  border-radius: var(--radius);
+  color: var(--amber);
+}
+
+.top__user button:hover {
+  background: var(--amber);
+  color: var(--ink);
+}
+
+/* ---------- search ---------- */
+
+.search {
+  position: relative;
+  flex: 1 1 320px;
+  max-width: 460px;
+}
+
+.search input {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.search input::placeholder {
+  color: var(--muted);
+}
+
+.search__drop {
+  position: absolute;
+  inset-inline: 0;
+  top: calc(100% + 6px);
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--raise);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.search__drop button {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 9px 10px;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-radius: var(--radius);
+}
+
+.search__drop button:hover {
+  background: rgba(245, 184, 65, 0.12);
+}
+
+.search__year,
+.search__msg {
+  color: var(--muted);
+}
+
+.search__msg {
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  padding: clamp(40px, 7vw, 88px) clamp(16px, 4vw, 52px) 34px;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero h1 {
+  margin: 0 0 12px;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(32px, 5.4vw, 60px);
+  line-height: 1.08;
+  max-width: 18ch;
+}
+
+.hero p {
+  margin: 0 0 28px;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+/* ---------- genre picker ---------- */
+
+.picker__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chipbtn {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 7px 13px;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 14px;
+}
+
+.chipbtn:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.chipbtn--on {
+  background: hsl(var(--hue) 62% 50% / 0.16);
+  border-color: hsl(var(--hue) 70% 58%);
+  color: hsl(var(--hue) 82% 78%);
+}
+
+.chipbtn__count {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.picker__clear {
+  margin-top: 14px;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--muted);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ---------- cards ---------- */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 188px;
+  height: 268px;
+  flex: 0 0 auto;
+  padding: 12px;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform 140ms ease, border-color 140ms ease;
+}
+
+.card--sm {
+  width: 100%;
+  height: 210px;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.card__grain {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 90% at 20% 0%,
+    rgba(255, 255, 255, 0.14),
+    transparent 62%
+  );
+  pointer-events: none;
+}
+
+.card__top,
+.card__body {
+  position: relative;
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card__title {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 21px;
+  line-height: 1.16;
+}
+
+.card__meta {
+  font-size: 12px;
+  color: rgba(236, 239, 246, 0.72);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  background: rgba(6, 9, 15, 0.6);
+  border-radius: 999px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.chip--predicted {
+  color: var(--amber);
+}
+
+.chip__tag {
+  font-size: 10px;
+  color: rgba(245, 184, 65, 0.75);
+}
+
+/* ---------- rails ---------- */
+
+.rail {
+  padding: 30px clamp(16px, 4vw, 52px) 6px;
+}
+
+.rail__head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.rail__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: 26px;
+}
+
+.rail__tick {
+  width: 3px;
+  height: 20px;
+  border-radius: 2px;
+}
+
+.rail__sub {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.rail__nav {
+  margin-left: auto;
+  display: flex;
+  gap: 6px;
+}
+
+.rail__nav button {
+  width: 32px;
+  height: 32px;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.rail__nav button:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+.rail__track {
+  display: flex;
+  gap: var(--rail-gap);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding-bottom: 12px;
+  scrollbar-width: thin;
+}
+
+.rail__track > * {
+  scroll-snap-align: start;
+}
+
+/* ---------- genre picks grid ---------- */
+
+.picks {
+  padding: 34px clamp(16px, 4vw, 52px) 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.picks__title {
+  margin: 0 0 18px;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: 28px;
+}
+
+.picks__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
+  gap: var(--rail-gap);
+}
+
+.picks__grid .card {
+  width: 100%;
+}
+
+/* ---------- sheet ---------- */
+
+.sheet__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(3, 5, 9, 0.78);
+  backdrop-filter: blur(4px);
+}
+
+.sheet {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) 1fr;
+  width: min(940px, 100%);
+  max-height: 88vh;
+  overflow: auto;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.sheet__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background: rgba(6, 9, 15, 0.55);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.sheet__seed {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 6px;
+  min-height: 320px;
+}
+
+.sheet__eyebrow {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(236, 239, 246, 0.7);
+}
+
+.sheet__seed h2 {
+  margin: 0;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.sheet__meta,
+.sheet__stats {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(236, 239, 246, 0.72);
+}
+
+.sheet__list {
+  padding: 28px 24px;
+}
+
+.sheet__list h3 {
+  margin: 0 0 16px;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.sheet__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+/* ---------- misc ---------- */
+
+.state {
+  padding: 22px clamp(16px, 4vw, 52px);
+  color: var(--muted);
+}
+
+.state--bad {
+  color: var(--bad);
+}
+
+.foot {
+  padding: 22px clamp(16px, 4vw, 52px);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media (max-width: 720px) {
+  .sheet {
+    grid-template-columns: 1fr;
+  }
+  .top__user {
+    margin-left: 0;
+    width: 100%;
+  }
+  .top__user input {
+    flex: 1;
+    width: auto;
+  }
+  .card {
+    width: 156px;
+    height: 234px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
