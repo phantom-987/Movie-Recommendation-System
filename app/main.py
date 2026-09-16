@@ -25,6 +25,7 @@ app.add_middleware(
 )
 
 
+
 @app.get("/health")
 def health():
     return {
@@ -102,3 +103,5 @@ def recommend(user_id: int, n: int = Query(10, ge=1, le=50)):
         return {"user_id": user_id, "recommendations": get_recommendations(user_id, n)}
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc))
+
+    

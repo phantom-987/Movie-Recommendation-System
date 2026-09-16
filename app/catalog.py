@@ -19,8 +19,18 @@ from functools import lru_cache
 
 import numpy as np
 import pandas as pd
+import json
+from pathlib import Path
 
 from app.recommender import model, movies, filtered_ratings
+
+POSTER_BASE_FALLBACK = None  # OMDb gives full URLs already, no base needed
+_POSTER_FILE = Path(__file__).parent.parent / "models" / "posters.json"
+
+if _POSTER_FILE.exists():
+    POSTERS = {int(k): v for k, v in json.loads(_POSTER_FILE.read_text()).items() if v}
+else:
+    POSTERS = {}
 
 # Rows shown in the Netflix-style home screen, in order.
 HOME_GENRES = [
@@ -128,6 +138,7 @@ def _row_to_dict(row, **extra) -> dict:
         "genres": list(row.genre_list),
         "rating_count": int(row.rating_count),
         "avg_rating": round(float(row.rating_mean), 2),
+        "poster_url": POSTERS.get(int(row.movieId)),
     }
     out.update(extra)
     return out

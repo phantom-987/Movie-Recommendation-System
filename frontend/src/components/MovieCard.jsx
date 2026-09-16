@@ -12,6 +12,9 @@ export default function MovieCard({ movie, onSelect, size = "md" }) {
       onClick={() => onSelect(movie)}
       aria-label={`${movie.title}. Show similar movies.`}
     >
+              {movie.poster_url && (
+        <img className="card__art" src={movie.poster_url} alt="" loading="lazy" />
+      )}
       <span className="card__grain" aria-hidden="true" />
 
       <span className="card__top">
