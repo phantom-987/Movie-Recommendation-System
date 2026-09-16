@@ -17,7 +17,7 @@ what a specific user would rate a movie they haven't seen.
 - ~84,000 movies
 
 NOTE- Since the full dataset is large, I filtered it to users and movies with at least 20 
-ratings each, then sampled it down to 1 million ratings to keep training fast and 
+ratings each, then sampled it down to 1 million ratings to keep training fast and
 manageable on a regular laptop.
 
 ## Results
